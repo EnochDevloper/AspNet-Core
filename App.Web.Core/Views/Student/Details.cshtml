@@ -1,0 +1,129 @@
+﻿@model App.Web.Core.Student
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Student</h4>
+    <hr />
+    <table class="table table-bordered">
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.s_name)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.s_name)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.s_loginName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.s_loginName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.s_passWord)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.s_passWord)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.s_address)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.s_address)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.s_sex)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.s_sex)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.s_age)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.s_age)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.s_phone)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.s_phone)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.s_status)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.s_status)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.s_remark)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.s_remark)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.s_createDate)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.s_createDate)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.s_Grade_ID)
+            </td>
+            <td>
+                @*@Html.DisplayFor(model => model.s_Grade_ID)*@
+                @{
+                    string gradeName = "";
+                    if (Model.s_Grade_ID.ToString().ToUpper() == "5D6D773B-E702-44F6-9A17-8653EDB750EC")
+                    {
+                        gradeName = "一年级";
+                    }
+                    else if (Model.s_Grade_ID.ToString().ToUpper() == "B9293E23-8BAC-4513-A074-B988CBC498B4")
+                    {
+                        gradeName = "二年级";
+                    }
+                    else if (Model.s_Grade_ID.ToString().ToUpper() == "8977C3AF-1D71-4553-B431-5DA584FDBDC1")
+                    {
+                        gradeName = "三年级";
+                    }
+                }
+                @gradeName
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center;">
+                <a asp-action="Edit" asp-route-id="@Model.s_id">编辑</a> |
+                <a asp-action="List">返回列表</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<div>
+    @*<a asp-action="Edit" asp-route-id="@Model.s_id">Edit</a> |
+        <a asp-action="List">Back to List</a>*@
+</div>

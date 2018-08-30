@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    ////Layout = "~/Views/Shared/_Layout.cshtml";
+    string name = ViewData["name"].ToString();
+}
+
+<h2>Index</h2>
+<div class="panel">
+    <table class="table table-bordered">
+        <tr>
+            <td>
+                <span>账号</span>
+            </td>
+            <td><input type="text" id="txtAccount" placeholder="请填写账号" /></td>
+        </tr>
+        <tr>
+            <td>
+                <span>密码</span>
+            </td>
+            <td><input type="text" id="txtPwd" placeholder="请填写密码" /></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" value="保存" id="btnSave" class="btn btn-primary btn-sm" />
+            </td>
+        </tr>
+    </table>
+</div>
+@section scripts{
+<script type="text/javascript">
+    $(function () {
+        $("#btnSave").on("click", function () {
+            debugger
+            var name = $("#txtAccount").val();
+            var pwd = $("#txtPwd").val();
+            if (!name) {
+                alert("请填写账号");
+                return false;
+            }
+            if (!pwd) {
+                alert("请填写密码");
+                return false;
+            }
+            $.post("/Student/Register", { name: name, passWord: pwd }, function (result) {
+                if (result.count > 0) {
+                    alert("添加成功");
+                } else {
+                    alert("系统异常,请稍候再试...");
+                    return false;
+                }
+            });
+        })
+
+    });
+</script>
+}
+

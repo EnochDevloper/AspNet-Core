@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>导入Excel文件</title>
+    <!--<script src="http://oss.sheetjs.com/js-xlsx/xlsx.full.min.js"></script>-->
+    <script src="../js/jquery-1.10.2.js"></script>
+    <script src="../js/xlsx.full.min.js"></script>
+    <script src="../js/ImportExcel.js"></script>
+</head>
+
+<body>
+    <!--onchange="importData(files,['姓名', '年龄', '性别', '地址', '生日'])"-->
+    <input type="file" id="txtfile" />
+    <div id="demo">
+        <table>
+            <tr>
+                <td>姓名</td>
+                <td><input type="text" name="txtName" id="txtName" /></td>
+            </tr>
+            <tr>
+                <td>年龄</td>
+                <td><input type="text" name="txtAge" id="txtAge" /></td>
+            </tr>
+            <tr>
+                <td>性别</td>
+                <td><input type="text" name="txtSex" id="txtSex" /></td>
+            </tr>
+            <tr>
+                <td>地址</td>
+                <td><input type="text" name="txtAddress" id="txtAddress" /></td>
+            </tr>
+            <tr>
+                <td>生日</td>
+                <td><input type="text" name="txtBirthDay" id="txtBirthDay" /></td>
+            </tr>
+        </table>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $("#txtfile").change(function () {
+                debugger
+                var file = $(this).context.files[0];
+                var columns = ['姓名', '年龄', '性别', '地址', '生日'];
+                GetExcelData(file, columns);
+            });
+        });
+
+        function importData(data) {
+
+            //var data = GetExcelData(files, columns);
+            //debugger
+            //console.log(data);
+
+            if (data) {
+                if (data.msg) {
+                    alert(data.msg);
+                    return
+                }
+
+                var list = data.data;
+                var name = "", address = "", age = "", sex = "", birthday = "";
+                for (var i = 0; i < list.length; i++) {
+
+                    name += list[i].姓名 + ',';
+                    address += list[i].地址 + ',';
+                    age += list[i].年龄 + ',';
+                    sex += list[i].性别 + ',';
+                    birthday += list[i].生日 + ',';
+                }
+            }
+
+
+            $("#txtName").val(name);
+            $("#txtAge").val(age);
+            $("#txtSex").val(sex);
+            $("#txtAddress").val(address);
+            $("#txtBirthDay").val(birthday);
+
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>

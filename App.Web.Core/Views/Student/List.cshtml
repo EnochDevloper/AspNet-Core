@@ -1,0 +1,124 @@
+﻿@model List<Student>
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List</h2>
+<a asp-action="Index">Create New</a>
+<section class="panel">
+    <div class="panel-body">
+        <table id="tblList" class="table table-bordered table-hover bg-white table-list">
+            <tr>
+                <th class="th-checkbox">
+                    <label class="checkbox-inline" style=" font-weight: bold;">
+                        <input type="checkbox" name="chkAll" id="chkAll" onclick="checkAll(this)"> 全选
+                    </label>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].s_name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].s_loginName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].s_address)
+                </th>
+                <th class="th_sort" onclick="ChangeSort(this)">
+                    @Html.DisplayNameFor(model => model[0].s_sex)
+                    <i class="icon-sort sortSex" data-value="s_sex" data-sort="sort">&nbsp;</i>
+                </th>
+                <th class="th_sort" onclick="ChangeSort(this)">
+                    @Html.DisplayNameFor(model => model[0].s_age)
+                    <i class="icon-sort sortAge" data-value="s_age" data-sort="sort">&nbsp;</i>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].s_phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].s_remark)
+                </th>
+                <th class="th_sort" onclick="ChangeSort(this)">
+                    @Html.DisplayNameFor(model => model[0].s_createDate)
+                    <i class="icon-sort sortCreateDate" data-value="s_createDate" data-sort="sort">&nbsp;</i>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].s_status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].s_Grade_ID)
+                </th>
+                <th>操作</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr @(item.s_status == 1 ? Html.Raw("style='color:red'") : Html.Raw("style='color:green'"))>
+                    <td class="th-title">
+                        <label class="checkbox-inline">
+                            <input name="s_id" value="@Html.DisplayFor(modelItem => item.s_id)" type="checkbox" />
+                        </label>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.s_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.s_loginName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.s_address)
+                    </td>
+                    <td>
+                        @(item.s_sex.ToString() == "1" ? "女" : "男")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.s_age)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.s_phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.s_remark)
+                    </td>
+                    <td>
+                        @item.s_createDate.ToString()
+                    </td>
+                    <td>
+                        @(item.s_status.ToString() == "1" ? "启用" : "禁用")
+                    </td>
+                    <td>
+                        @{
+                            string gradeName = "";
+                            switch (item.s_Grade_ID.ToString().ToUpper())
+                            {
+                                case "B9293E23-8BAC-4513-A074-B988CBC498B4":
+                                    gradeName = "二年级";
+                                    break;
+                                case "8977C3AF-1D71-4553-B431-5DA584FDBDC1":
+                                    gradeName = "三年级";
+                                    break;
+                                default:
+                                    gradeName = "一年级";
+                                    break;
+                            }
+                        }
+                        @gradeName
+                    </td>
+                    <td>
+                        @*<button id="btnLook" class="btn btn-info btn-xs">查看详情</button>*@
+                        @Html.ActionLink("查看详情", "Details", new { id = item.s_id }, new { @class = "btn btn-info btn-xs" @*target = "_blank"*@})
+                        @*<a asp-action="Details" asp-route-id="@item.s_id" class="btn btn-info btn-xs">查看详情</a>*@
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</section>
+
+@section scripts{
+    <script type="text/javascript">
+        ///全选
+        function checkAll(obj) {
+            $("input[name='s_id']").prop("checked", $(obj).prop("checked"));
+        }
+    </script>
+}
