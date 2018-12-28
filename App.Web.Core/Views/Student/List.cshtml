@@ -3,7 +3,7 @@
     ViewData["Title"] = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@* 介绍 后台代码修改  不需要重新生成  直接刷新页面就行了 *@
 <h2>List</h2>
 <a asp-action="Index">Create New</a>
 <section class="panel">
@@ -52,7 +52,7 @@
             </tr>
             @foreach (var item in Model)
             {
-                <tr @(item.s_status == 1 ? Html.Raw("style='color:red'") : Html.Raw("style='color:green'"))>
+                <tr @(item.s_status == 1 ? Html.Raw("style='color:green'") : Html.Raw("style='color:red'"))>
                     <td class="th-title">
                         <label class="checkbox-inline">
                             <input name="s_id" value="@Html.DisplayFor(modelItem => item.s_id)" type="checkbox" />
